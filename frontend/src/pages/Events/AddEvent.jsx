@@ -1,7 +1,9 @@
-import { useNavigate, useState } from 'react';
+import {  useState } from 'react';
+import { useNavigate } from 'react-router';
 import useAxios from "../../hooks/useAxios";
+import axios from 'axios';
 
-export default function EventForm() {
+export default function EventForm({onAddEvent,apiUrl}) {
     const{post} = useAxios();
     const navigate = useNavigate();
   const [formData, setFormData]= useState({
@@ -9,6 +11,7 @@ export default function EventForm() {
     date: '',
     location: '',
     description: '',
+    type:'',
   });
 
   const handleChange = (e) =>{
@@ -21,21 +24,34 @@ const handleSubmit = (e) =>{
 
     const newEvent = {...formData}
 
-    const postData = async () =>{
-        const data = await post(apiUrl, newEvent);
-        if(data){
-            onAddEvent(data);
-        navigate('/event');
-        setFormData ({
-            title: '',
-            date: '',
-            location: '',
-            description: '',
-        });
-        }
-    }
+    // const postData = async () =>{
+    //     const data = await post(apiUrl, newEvent);
+    //     if(data){
+    //         onAddEvent(data);
+    //     navigate('/events');
+    //     setFormData ({
+    //         title: '',
+    //         date: '',
+    //         location: '',
+    //         description: '',
+    //         type:'',
+    //     });
+    //     }
+    // }
 
-    postData();
+    // postData();
+
+    axios.post('http://127.0.0.1:8000/api/events', newEvent)
+    .then((res) => {
+      onAddEvent(res.data); // passing the response data (new book) from the server to APP component
+        navigate('/events');
+        setFormData({   title: '',
+                  date: '',
+                  location: '',
+                  description: '',
+                  type:'',});
+    })
+    .catch(err => console.error('Failed to add book', err));
 
 }
 
@@ -47,7 +63,7 @@ const handleSubmit = (e) =>{
           id="title"
           name="title"
           type="text"
-          value={data.title}
+          value={formData.title}
           onChange={handleChange}
           required
         />
@@ -60,7 +76,7 @@ const handleSubmit = (e) =>{
           id="date"
           name="date"
           type="datetime-local"
-          value={data.date}
+          value={formData.date}
           onChange={handleChange}
           required
         />
@@ -73,7 +89,7 @@ const handleSubmit = (e) =>{
           id="location"
           name="location"
           type="text"
-          value={data.location}
+          value={formData.location}
           onChange={handleChange}
           required
         />
@@ -85,13 +101,24 @@ const handleSubmit = (e) =>{
         <textarea
           id="description"
           name="description"
-          value={data.description}
+          value={formData.description}
           onChange={handleChange}
         />
        
       </div>
 
-      <button type="submit" disabled={processing}>
+      <div>
+        <label htmlFor="type">Type</label>
+        <textarea
+          id="type"
+          name="type"
+          value={formData.type}
+          onChange={handleChange}
+        />
+       
+      </div>
+
+      <button type="submit" >
         Add Event
       </button>
     </form>

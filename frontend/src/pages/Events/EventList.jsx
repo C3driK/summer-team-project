@@ -49,7 +49,7 @@ const EventList = ({eventData, onHandleEditFields,onHandleDelete}) =>{
         <>
         <h1>Event Details</h1>
         
-        <div className={styles.searchAndFilter}>
+        {/* <div className={styles.searchAndFilter}>
 
             <div className={styles.search}>
              <label htmlFor='search' >Search</label>
@@ -59,7 +59,7 @@ const EventList = ({eventData, onHandleEditFields,onHandleDelete}) =>{
             <div className={styles.filter}>
                 <label htmlFor='filter-user'>Filter by Title</label>
                 <select value={filter} onChange={(e) =>setFilter(e.target.value)}>
-                <option value = 'all'>All</option>
+                <option value = 'all'>All</option> */}
 
                 {/* This displyas duplicate title */}
                 {/* {employeeData.map(employee =>(
@@ -67,14 +67,14 @@ const EventList = ({eventData, onHandleEditFields,onHandleDelete}) =>{
                 ))} */}
 
                 {/* It removes the duplicate title */}
-                {[...new Set(employeeData.map(emp => emp.title))].map(title => (
+                {/* {[...new Set(employeeData.map(emp => emp.title))].map(title => (
                     <option key={title} value={title}>{title}</option>
-                ))}
+                ))} */}
               
 
-                </select>
+                {/* </select>
             </div>
-        </div>
+        </div> */}
 
        <div className={styles.employeeList}>
        {eventData.length > 0 ? (
