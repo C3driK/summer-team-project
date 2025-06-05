@@ -32,7 +32,7 @@ const useAxios = () => {
 
     const remove = async (url, data) => {
         try {
-            const response = await axios.delete(url, data);
+            const response = await axios.delete(url, { data });
             return response.data;
         } catch (err) {
             console.log('Failed to delete data', err);

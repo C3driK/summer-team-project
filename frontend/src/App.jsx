@@ -12,6 +12,7 @@ function App() {
   const [eventData, setEventData] = useState([]);
 
   const apiUrl = 'http://127.0.0.1:8000/api/events';
+  console.log('Callling api', apiUrl);
   const {get, patch, remove} = useAxios();
   
   useEffect(() =>{
@@ -37,7 +38,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Root />}>
           {/* <Route index element={<About />} /> */}
-          <Route path="/event" 
+          <Route path="/events" 
                element = { <EventList 
                 eventData={eventData} 
                setEventData = {setEventData} 

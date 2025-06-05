@@ -13,7 +13,7 @@ const Header = ({logo}) =>{
                 <ul>
                     {/* <li> <NavLink to = '/'>Home</NavLink></li> */}
                     <li className={styles.navListItem}> <NavLink to = '/' className={styles.navLink}>Home</NavLink></li>
-                    <li className={styles.navListItem}> <NavLink to = '/event' className={styles.navLink} >Events</NavLink></li>
+                    <li className={styles.navListItem}> <NavLink to = '/events' className={styles.navLink} >Events</NavLink></li>
                     <li className={styles.navListItem}> <NavLink to = '/add' className={styles.navLink} >Add New Event</NavLink></li>
                    
                 </ul>
